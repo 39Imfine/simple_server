@@ -1,0 +1,3 @@
+/Users/leejeongmin/Desktop/Development/C/simple_server/cmake-build-debug/CMakeFiles/simple_server.dir
+/Users/leejeongmin/Desktop/Development/C/simple_server/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/leejeongmin/Desktop/Development/C/simple_server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
