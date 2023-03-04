@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
+#include <arpa/inet.h>
 #define PORT 3500
 #define BACKLOG 10
 
@@ -29,6 +30,23 @@ int main() {
         perror("bind");
         exit(1);
     }
-    
+
+    if (listen(sockfd, BACKLOG) == -1){
+        perror("listen");
+        exit(1);
+    }
+
+    while(1) {
+        sin_size = sizeof(struct sockaddr_in);
+        if ((new_fd = accept(sockfd, (struct sockaddr*)
+                &their_addr, &sin_size)) == -1){
+            perror("accept");
+            continue;
+        }
+        printf("server: got connection from %s\n", inet_ntoa(their_addr.sin_addr));
+    }
+
+
+
     return 1;
 }
