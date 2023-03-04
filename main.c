@@ -25,5 +25,10 @@ int main() {
     my_addr.sin_port = htons(PORT);
     my_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
+    if (bind(sockfd, (struct sockaddr *)&my_addr, sizeof(struct sockaddr)) == -1){
+        perror("bind");
+        exit(1);
+    }
+    
     return 1;
 }
