@@ -7,11 +7,15 @@
 #include <sys/socket.h>
 #include <sys/wait.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #define PORT 3500
 #define BACKLOG 10
+#define BUFFERSIZE 1000
 
 int main() {
     int sockfd, new_fd;
+    char buff_rcv[BUFFERSIZE];
+    char buff_snd[BUFFERSIZE];
 
     struct sockaddr_in my_addr;
     struct sockaddr_in their_addr;
@@ -46,7 +50,12 @@ int main() {
         printf("server: got connection from %s\n", inet_ntoa(their_addr.sin_addr));
     }
 
+    read(new_fd, buff_rcv, BUFFERSIZE);
+    sprintf(buff_snd, "%d : %s", strlen(buff_rcv), buff_rcv);
+    write(new_fd, buff_snd, strlen(buff_snd) + 1);
 
+    close(new_fd);
+    close(sockfd);
 
     return 1;
 }
