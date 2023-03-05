@@ -48,11 +48,10 @@ int main() {
             continue;
         }
         printf("server: got connection from %s\n", inet_ntoa(their_addr.sin_addr));
-    }
+        char message[] = "Hello, Client!";
+        write(new_fd, message, strlen(message));
 
-    read(new_fd, buff_rcv, BUFFERSIZE);
-    sprintf(buff_snd, "%d : %s", strlen(buff_rcv), buff_rcv);
-    write(new_fd, buff_snd, strlen(buff_snd) + 1);
+    }
 
     close(new_fd);
     close(sockfd);
